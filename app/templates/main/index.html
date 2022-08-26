@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<div class="container mt-3">
+  <div class="row g-5">
+    <div class="col-md-5 mb-5 order-md-first order-last">
+      <h3 class="ms-3">Portfolio</h3>
+      <div class="list-group list-group-flush border-bottom scrollarea">
+        {% for stock in portfolio %}
+        <a id="stock_listing" value="{{ stock.id }}" onclick="load_detail('{{ stock.id }}')" href="#" class="list-group-item list-group-item-action py-3 lh-sm">
+          <div class="d-flex w-100 align-itemscenter justify-content-between">
+            <div>
+              <strong class="mb-1">{{ stock.corporate_name }}</strong>
+              <small class="text-muted"> ({{ stock.symbol }})</small>
+            </div>
+            {% if stock.price >= stock.open %}
+            <span>+1.75%</span>
+            {% else %}
+            <span style='color: red'>-1.25%</span>
+            {% endif %}
+          </div>
+          <div class="mb-1 d-flex">
+            <div class="flex-fill">Price: {{ stock.price }}</div>
+            <div class="flex-fill">High: {{ stock.high }}</div>
+            <div class="flex-fill">Low: {{ stock.low }}</div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-md-7 mb-5">
+      <h3 id="stock_graph">Alphabet Inc</h3>
+      <div class="card">
+        <div class="card-body">
+          <div class="border border-2 rounded">
+            <div id="price_plot" style="width:100%;max-width:700px"></div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <strong>
+            This area here will give more details of the stock current values.<br>
+          </strong>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab eius ex nihil quam nesciunt architecto corporis fugit, cupiditate hic quidem sapiente, quia mollitia vero dolor harum praesentium quas officiis accusantium! <br>
+          <a href="#">A link to the stock details page</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="{{ url_for('static', filename='main/portfolio.js') }}"></script>
+
+{% endblock %}

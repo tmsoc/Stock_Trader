@@ -1,0 +1,46 @@
+{% extends 'settings/_settings_base.html' %}
+
+{% block settings %}
+
+<form action="" method="post">
+  {{ form.hidden_tag() }}
+  <div class="ms-5">
+  </div>
+  <h3 pb-5>Be Notified When:</h3>
+  <hr>
+  <div class="px-3">
+    <div class="row mb-5">
+      <div class="col-sm-4">
+        {{ form.account_change.label(class='form-label') }}
+      </div>
+      <div class="col-sm-8 form-check form-switch">
+        {{ form.account_change(class='form-check-input', style='transform: scale(1.2);') }}
+      </div>
+    </div>
+    <div class="row mb-5">
+      <div class="col-sm-4">
+        {{ form.holds.label(class='form-label') }}
+      </div>
+      <div class="col-sm-8 form-check form-switch">
+        {{ form.holds(class='form-check-input', style='transform: scale(1.2);') }}
+      </div>
+    </div>
+    <div class="row mb-5">
+      <div class="col-sm-4">
+        {{ form.watchlist.label(class='form-label') }}
+      </div>
+      <div class="col-sm-8 form-check form-switch">
+        {{ form.watchlist(class='form-check-input', style='transform: scale(1.2);') }}
+      </div>
+    </div>
+    <div class="mb-5">
+      {{ form.submit(class='btn btn-outline-primary') }}
+    </div>
+  </div>
+</form>
+
+<script>
+  $('#sb-notify').addClass('active')
+</script>
+
+{% endblock %}
